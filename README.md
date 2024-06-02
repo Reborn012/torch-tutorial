@@ -145,6 +145,10 @@ import torchvision.transforms as transforms
 import torch.nn as nn
 import torch.nn.functional as F
 import torch.optim as optim
+
+# Determine the training device
+device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
+print(f"Training device is {device}.")
 ```
 - **torch**: The core PyTorch library.
 - **torchvision**: A library that provides easy access to popular datasets and common transformations.
@@ -162,6 +166,9 @@ transform = transforms.Compose([
 ```
 Next, we load the training and test datasets:
 ```python
+# Fix random seed
+torch.manual_seed(1024) 
+
 # Downloads the Fashion-MNIST dataset.
 trainset = torchvision.datasets.FashionMNIST(root='./data', train=True, download=True, transform=transform)
 # Provides an iterable over the given dataset.
@@ -195,6 +202,7 @@ class SimpleCNN(nn.Module):
         return x
 
 net = SimpleCNN()
+net = net.to(device)  # move the model to the training device
 ```
 - **nn.Conv2d**: A convolutional layer.
 - **nn.MaxPool2d**: A max pooling layer.
@@ -215,10 +223,16 @@ optimizer = optim.SGD(net.parameters(), lr=0.001, momentum=0.9)
 ## Training the Model
 The training loop will iterate over the dataset multiple times and update the model parameters:
 ```python
+# Training
+import time
+
 for epoch in range(10):  # loop over the dataset 10 times
     running_loss = 0.0
     for i, data in enumerate(trainloader):
+        start_time = time.time()
         inputs, labels = data	# get the training data
+        inputs = inputs.to(device)
+        labels = labels.to(device)
 
         optimizer.zero_grad()	# clear the gradients
 
@@ -229,7 +243,11 @@ for epoch in range(10):  # loop over the dataset 10 times
 
         running_loss += loss.item()
         if i % 100 == 99:    # print every 100 mini-batches
-            print(f'[Epoch {epoch + 1}, Batch {i + 1}] loss: {running_loss / 100:.3f}')
+            print(
+                f'[Epoch {epoch + 1}, Batch {i + 1}] '
+                f'loss: {running_loss / 100:.3f}, '
+                f'step time: {(time.time() - start_time) * 1000:.2f}ms'
+            )
             running_loss = 0.0
 
 print('Finished Training')
@@ -237,13 +255,15 @@ print('Finished Training')
 ## Evaluating the Model
 We'll evaluate the model on the test dataset and print the accuracy:
 ```python
+# Evaluate the model
 correct = 0
 total = 0
-with torch.no_grad():	# disables gradient calculation for evaluation
+with torch.no_grad():
     for data in testloader:
         images, labels = data
+        images, labels = images.to(device), labels.to(device)
         outputs = net(images)
-        _, predicted = torch.max(outputs, 1)	# returns the indice of the maximum value
+        _, predicted = torch.max(outputs, 1)
         total += labels.size(0)
         correct += (predicted == labels).sum().item()
 
