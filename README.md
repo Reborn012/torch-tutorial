@@ -309,6 +309,11 @@ python train_gpt.py --config=config/shakespear_char_cpu.yaml
 python sample.py --config=sample-config/shakespear_char_cpu.yaml
 ```
 
+Sampling from the pre-trained model trained with one epoch
+```bash
+python sample.py --config=sample-config/shakespear_char_cpu_one_epoch.yaml
+```
+
 ## Distributed Training
 
 To train the model using multiple GPUs, use the `torchrun` command.

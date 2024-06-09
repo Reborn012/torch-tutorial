@@ -31,4 +31,4 @@ warmup_iters: 100 # not super necessary potentially
 device: 'cpu'
 compile: False
 num_epochs: 1
-max_iters: 5000
+# max_iters: 5000 # set max_iters will override num_epochs
