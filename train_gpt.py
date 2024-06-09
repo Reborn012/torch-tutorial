@@ -284,7 +284,6 @@ def main():
     print_color(config, 'yellow')
 
     # Initial distributed training setup, currently using DDP only
-    # @TODO: Implement FSDP
     ddp = int(os.environ.get('RANK', -1)) != -1     # check if we are training distributedly
     if ddp:
         ddp_rank, ddp_local_rank, ddp_world_size, device = initialize_ddp(config['backend'])
