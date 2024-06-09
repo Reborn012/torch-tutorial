@@ -278,6 +278,15 @@ print(f'Accuracy of the network on the 10000 test images: {100 * correct / total
 
 ---
 
+# Autoregression Reference Links
+
+- [Side by Side Explanation by labml](https://nn.labml.ai/transformers/mha.html)
+- [Char RNN from CSC413/2516, University of Toronto](https://colab.research.google.com/github/dudeperf3ct/DL_notebooks/blob/master/RNN/char_rnn_pytorch.ipynb)
+- [GPT by Andrej Karpathy](https://colab.research.google.com/drive/1JMLa53HDuA-i7ZBmqV7ZnA3c_fvtXnx-?usp=sharing)
+- [nanoGPT by Andrej Karpathy](https://github.com/karpathy/nanoGPT/tree/master)
+
+---
+
 # Using PyTorch to Train a Simple GPT on a Text Dataset
 
 We will be training a GPT model on the shakespear-char dataset. The code is adapted from Andrej Karpathy's [nanoGPT](https://github.com/karpathy/nanoGPT)
