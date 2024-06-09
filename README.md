@@ -53,6 +53,12 @@ This document will guide you through the installation of Python and PyTorch, set
 
   <img src="assets/conda_version.png" alt="conda_version.png" style="zoom:50%;" />
 
+- (Optional) Prevent `conda` from automatically activating the `(base)` environment on startup
+
+  ```bash
+  conda config --set auto_activate_base false
+  ```
+
 ## Setting Up Conda Environment
 
 1. Create a New Environment
