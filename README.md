@@ -270,3 +270,27 @@ with torch.no_grad():
 print(f'Accuracy of the network on the 10000 test images: {100 * correct / total:.2f}%')
 ```
 
+---
+
+# Using PyTorch to Train a Simple GPT on a Text Dataset
+
+We will be training a GPT model on the shakespear-char dataset. The code is adapted from Andrej Karpathy's [nanoGPT](https://github.com/karpathy/nanoGPT)
+
+## Preparing the data
+
+```bash
+python data/shakespeare_char/prepare.py
+```
+
+## Training on CPU
+
+```bash
+python train_gpt.py --config=config/shakespear_char_cpu.yaml
+```
+
+## Sampling from the Trained Model
+
+```bash
+python sample.py --config=sample-config/shakespear_char_cpu.yaml
+```
+

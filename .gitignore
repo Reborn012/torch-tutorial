@@ -1,2 +1,4 @@
 # Dataset
 data/
+out-shakespeare-char/
+*.pyc
