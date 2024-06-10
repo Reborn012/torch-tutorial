@@ -2,3 +2,6 @@
 # data/
 out-shakespeare-char/
 *.pyc
+*.txt
+*.pkl
+*.bin
