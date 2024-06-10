@@ -313,7 +313,11 @@ def main():
 
     # Initialize DataLoader
     train_loader, val_loader = init_dataloader(config, ddp)
-    max_iters = len(train_loader) * config['num_epochs']
+    if config['max_iters'] == -1:
+        max_iters = len(train_loader) * config['num_epochs']
+    else:
+        assert config['max_iters'] > 0, "max_iters must be -1 or > 0"
+        max_iters = config['max_iters']
     config['lr_decay_iters'] = max_iters  # set the lr decay iters based on the max iters
 
 
