@@ -103,10 +103,10 @@ PyTorch can be installed with different configurations depending on whether you 
 If you don't have a compatible GPU or don't need to use GPU acceleration, you can install the CPU-only version of PyTorch.
 
 1. **Open a terminal or command prompt.**
-3. **Install PyTorch for CPU**, e.g., on Mac:
+3. **Install PyTorch for CPU**, e.g., on Linux:
    
     ```bash
-    conda install pytorch::pytorch torchvision torchaudio -c pytorch
+    pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
     ```
 
 ### GPU Installation
@@ -122,9 +122,9 @@ To leverage the power of GPU for faster computations, you can install the GPU-en
         ```
         
         <img src="assets/cuda.png" alt="cuda" style="zoom:50%;" />
-    - Use the appropriate installation command. For example, to install PyTorch 2.3.0 with CUDA 12.1 support:
+    - Use the appropriate installation command. For example, to install the latest PyTorch with CUDA 12.6 support on Linux:
         ```bash
-        conda install pytorch torchvision torchaudio pytorch-cuda=12.1 -c pytorch -c nvidia
+        pip3 install torch torchvision torchaudio
         ```
 
 ### Verifying the Installation
